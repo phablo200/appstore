@@ -1,0 +1,50 @@
+.form-container {
+	display: flex;
+	flex-direction:column;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+.form-row > div {
+	min-width: 200px;
+	margin: 0 10px;
+}
+
+.form-row button {
+	margin: 10px;
+	width: 150px;
+}
+
+.list-items-container {
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	margin-top: 20px;
+	justify-content: center;
+}
+
+.list-item-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.list-item {
+	max-width: 220px;
+	min-width: 220px
+}
+
+.list-card-footer {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 0.8rem;
+}
+
+.list-card-footer-actions {
+	display: flex;
+	justify-content: space-around;
+	width: 50px;
+}

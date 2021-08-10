@@ -1,6 +1,6 @@
 
 import { createTheme } from '@material-ui/core/styles';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createTheme({
   palette: {
@@ -21,9 +21,9 @@ const theme = createTheme({
 
 const MaterialProvider = props => {
     return (
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
             {props.children}
-        </MuiThemeProvider>
+        </ThemeProvider>
     );
 };
 

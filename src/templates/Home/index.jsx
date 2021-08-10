@@ -1,21 +1,33 @@
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/Card';
+import './style.css';
+import List from './list';
+import NewList from './add';
+import { connect } from 'react-redux';
+import { getListTotal, getClosedItems, getOpenedItems } from '../../store/reducers/listReducer';
 
-const Home = () => {
+const Home = (props) => {
     return (
-        <div className="new-list-container">
-            <Card className="card">
-                <CardActionArea className="card-action-area">
-                    <CardContent className="card-content">
-                        <div className="title">
-                            <p>Adicionar</p>
-                        </div>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+        <div className="page-container">
+            <NewList />
+            {
+                props.list.items.length > 0 && ( 
+                    <List description={props.list.list} 
+                        total={props.total} 
+                        openedItems={props.openedItems}
+                        closedItems={props.closedItems}
+                    />
+                )
+            }
         </div>
-    )
+    );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        list: state.listReducer,
+        total: getListTotal(state),
+        openedItems: getOpenedItems(state),
+        closedItems: getClosedItems(state),
+    };
+};
+
+export default connect(mapStateToProps)(Home);
