@@ -1,6 +1,8 @@
 export const Types = {
 	START_UPDATE: 'form/START_UPDATE',
 	FINISH_UPDATE: 'form/FINISH_UPDATE',
+	START_ADD: 'form/START_ADD',
+	FINISH_ADD: 'form/FINISH_ADD'
 };
 
 export const Creators = {
@@ -14,4 +16,15 @@ export const Creators = {
 	finishUpdate: () => ({
 		type: Types.FINISH_UPDATE
 	}),
+	startAdd: (list) => {
+		return {
+			type: Types.START_ADD,
+			list,
+		}
+	},
+	finishAdd: () => {
+		return {
+			type: Types.FINISH_ADD
+		};
+	}
 };

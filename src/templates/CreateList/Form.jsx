@@ -16,22 +16,27 @@ const initialState = {
 	unit: '',
 	price: '',
 	showErrors: false
-}
+};
 
 class Form extends Component {
+	
 	state = { ...initialState };
 
 	componentDidUpdate (prevProps) {
 		if (this.props.form.action === 'update' && prevProps.form.productToUpdate !== this.props.form.productToUpdate) {
 			const { product, quantity, unit, price } = this.props.form.productToUpdate;
-			
 			this.setState({
+				list: this.props.form.listToUpdate,
 				product,
 				quantity,
 				unit,
 				price,
 				showErrors: false,
 			})
+		}
+
+		if (this.props.form.action === 'new' && prevProps.form.action !== this.props.form.action) {
+			this.setState({ list: this.props.form.listToUpdate });
 		}
 	}
 
@@ -44,15 +49,16 @@ class Form extends Component {
 		if (!list || !product || !quantity || !unit) {
 			this.setState({ ...this.state, showErrors: true })
 		} else {
-			this.props.form.action === 'new'
-				? this.addItem({ product, quantity, unit, price }, list)
-				: this.updateItem({ product, quantity, unit, price }, list);
+			this.props.form.action === 'update'
+				? this.updateItem({ product, quantity, unit, price }, list)
+				: this.addItem({ product, quantity, unit, price }, list);
 		}
 	}
 
 	addItem = (product, list) => {
 		this.props.addProduct(product, list);
 		this.clearState();
+		this.props.finishAdd();
 	}
 
 	updateItem = (product, list) => {
@@ -67,6 +73,10 @@ class Form extends Component {
 	}
 
 	render () {
+		if (!this.props.showForm) {
+			return <div></div>;
+		}
+		
 		return (
 			<form className="form-container">
 				<div className="form-row">
@@ -137,9 +147,11 @@ class Form extends Component {
 	}
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+	const showForm = (state.formReducer.action || ownProps.url === 'novo');
 	return {
-		form: state.formReducer
+		form: state.formReducer,
+		showForm
 	};
 };
 

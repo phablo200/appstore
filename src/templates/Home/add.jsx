@@ -1,7 +1,9 @@
 import CustomCard from "../../common/Card";
 
-const NewList = () => (
-	<CustomCard link="/lista" containerClass="new-list-container">
+const NewList = (props) => (
+	<CustomCard action={props.newList} 
+		link="/lista/novo" 
+		containerClass="new-list-container">
 		<div>
 			<p className="title">
 				Adicionar novas listas

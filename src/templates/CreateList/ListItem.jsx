@@ -7,8 +7,8 @@ const ListItem = (props) => {
 		<CustomCard link="#" 
 			containerClass="list-item" 
 			footer={<ListItemFooter list={props.list} item={props.item} id={props.id} total={props.total}  deleteProduct={props.deleteProduct} />}
-			image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1200px-A_small_cup_of_coffee.JPG"
-			>
+			image={props.img}
+			action={() => props.toggleProduct(props.id)}>
 			<div>
 				<div className="list-item-header">
 					<Typography variant="subtitle1" component="h2">

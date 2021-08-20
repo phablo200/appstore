@@ -8,6 +8,7 @@
 .new-list-container {
 	width: 80%;
 	padding: 20px;
+
 }
 
 .list-container {
@@ -27,26 +28,18 @@
 	font-size: 13.5px;
 }
 
-.card {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+.closed-list {
+	border-left: 5px solid #00b0ff;
 }
 
-.card-action-area {
-	flex: 1;
+.opened-list {
+	border-left: 5px solid #e91e63;
 }
 
-.card-content {
-	display: flex;
-	justify-content: center;
-}
-
-.card-footer {
-	display: flex;
-	justify-content: space-between;
-	font-weight: bolder;
-	color: #666;
-	font-size: 12.5px;
-	align-items: center;
+.home-image {
+	background-image: url(https://media.istockphoto.com/photos/shopping-list-with-empty-shopping-cart-on-wooden-background-picture-id908021936);
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }

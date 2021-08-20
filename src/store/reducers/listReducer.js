@@ -6,15 +6,15 @@ const initialState = {
 	items: [],
 };
 
+
 const listReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case Types.NEW_LIST:
+			return { ...initialState, date: getDate() };
 		case Types.ADD_PRODUCT:
 			return {
-				list: action.list,
-				items: [ 
-					...state.items, 
-					{ ...action.product, total: getItemTotal(action.product), id: uuidv1(), checked: false }
-				]
+				...state,
+				list: action.list
 			};
 		case Types.DELETE_PRODUCT:
 			return {
@@ -29,9 +29,25 @@ const listReducer = (state = initialState, action) => {
 			};
 		case Types.UPDATE_PRODUCT:
 			return {
+				...state,
 				list: action.list,
 				items: updateProduct(state.items, action.product),
 			};
+		case Types.GET_IMAGE_SUCCESS:
+		case Types.GET_IMAGE_FAILURE:
+			return {
+				...state,
+				items: [
+					...state.items,
+					{
+						...action.product,
+						total: getItemTotal(action.product), 
+						id: uuidv1(), 
+						checked: false,
+						img: action.img,
+					}
+				]
+			}
 		default: 
 			return state;
 	}
@@ -58,6 +74,12 @@ function toggleItem (items, productId) {
 		{...items[index], checked: !items[index]['checked']},
 		...items.slice(index+1)
 	]
+};
+
+function getDate() {
+	const date = new Date();
+	const options = {year: 'numeric', month: '2-digit', day: '2-digit'}
+	return date.toLocaleDateString('pt-BR', options);
 };
 
 export const getListTotal = createSelector(

@@ -4,9 +4,12 @@ import ListItem from '../Home/item';
 import Footer from "./footer";
 
 const List = (props) => {
+    console.log('props', props);
     return (
-        <CustomCard link="/lista" containerClass="list-container"
-            footer={<Footer total={props.total}/>}>
+        <CustomCard link="/lista/edicao" containerClass="list-container"
+            footer={<Footer total={props.total} date={props.date} />}
+            cardClass={props.openedItems < 1 ? 'closed-list' : 'opened-list'}
+            >
             <div>
                 <p className="title">{props.description}</p>
                 <div className="list-card-body">
